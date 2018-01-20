@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Checks</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+  <style>
+    .fontfamily{
+      font-family: "Allerta Stencil", Sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+    <a href="#"><b class="fontfamily">Home</b></a>
+    <b> | </b>
+    <a href="#"><b class="fontfamily">Products</b></a>
+      <b> | </b>
+    <a href="#"><b class="fontfamily">Users</b></a>
+      <b> | </b>
+    <a href="#"><b class="fontfamily">Manual Orders</b></a>
+      <b> | </b>
+    <a href="#"><b class="fontfamily">Checks</b></a>
+
+    <b class="pull-right"><br>&nbsp;	&nbsp;	<u>Admin</u></b>
+    <img src="images/user.png" class="img-responsive img-circle pull-right" style="display:inline" width="60" height="60">
+    <br>
+    <h2 class="fontfamily">Checks</h2>
+    </div>
+  </div>
+
+  <div class="container">
+      <div class="row">
+          <div class='col-md-3'>
+              <div class="form-group">
+                <p class="fontfamily">from date:</p>
+                      <input type='date' class="form-control" value="2012-10-08" />
+              </div>
+          </div>
+          <div class='col-md-3'>
+              <div class="form-group">
+                <p class="fontfamily">to date:</p>
+                      <input type='date' class="form-control" value="2012-10-08" />
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+					<select class="form-control" name="users">
+						<option value="Users" selected="selected">Users</option>
+						<option value="Egypt" >Tarek</option>
+						<option value="USA" >Amr</option>
+						<option value="England" >Mina</option>
+						<option value="Spain" >Mohamed</option>
+					</select>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <table class="table table-bordered">
+      <thead>
+        <tr class="info">
+          <th class="col-md-6">Name</th>
+          <th class="col-md-6">Total Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="success">
+          <td><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/add.png" width="10" height="10"></a> Mina Nasr</td>
+          <td>mina@gmail.com</td>
+        </tr>
+        <tr class="active">
+          <td><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/add.png" width="10" height="10"></a> Tarek Essam</td>
+          <td>tarek@gmail.com</td>
+        </tr>
+        <tr class="success">
+          <td><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/add.png" width="10" height="10"></a> Amr Esaam</td>
+          <td>amr@gmail.com</td>
+        </tr>
+        <tr class="active">
+          <td><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/add.png" width="10" height="10"></a> Mohamed Assem</td>
+          <td>mohamed@gmail.com</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+  <ul class="pager">
+    <li><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/prev.png" width="20" height="20"></a></li>
+    <li><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/prev1.png" width="20" height="20"></a></li>
+
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">..</a></li>
+
+    <li><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/next1.png" width="20" height="20"></a></li>
+    <li><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/next.png" width="20" height="20"></a></li>
+  </ul>
+</div>
+</body>
+</html>
