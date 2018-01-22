@@ -1,0 +1,30 @@
+.input{
+	position: absolute;
+	left: 20%;
+}
+.button{
+	position: relative;
+	left: 20%;
+}
+.nav{
+	display: inline;
+}
+.admin{
+	float: right;
+
+}
+
+h3{
+	display: inline;
+}
+#add-category{
+	display: inline;
+	position: absolute;
+	left: 30%;
+}
+h6{
+
+	display: inline;
+	position: relative;
+	left: 33%;
+}

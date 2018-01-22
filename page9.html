@@ -9,6 +9,24 @@
     .fontfamily{
       font-family: "Allerta Stencil", Sans-serif;
     }
+    #table2{
+      width: 85%;
+    }
+    tr:hover {
+          background-color: gray;
+        }
+    #imagesdiv{
+      border: 1px solid gray;
+      border-radius: 6px;
+      width: 70%;
+    }
+    figure {
+      width: 25%;
+      float: left;
+      margin: 0;
+      text-align: center;
+      padding: 0;
+    }
   </style>
 </head>
 <body>
@@ -64,30 +82,99 @@
   <div class="container">
     <table class="table table-bordered">
       <thead>
-        <tr class="info">
+        <tr class="bg-primary">
           <th class="col-md-6">Name</th>
           <th class="col-md-6">Total Amount</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="success">
-          <td><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/add.png" width="10" height="10"></a> Mina Nasr</td>
-          <td>1000</td>
+        <tr>
+          <td><details class="det">
+            <summary>Mina Nasr</summary>
+          </details></td>
+          <td>20</td>
         </tr>
-        <tr class="active">
-          <td><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/add.png" width="10" height="10"></a> Tarek Essam</td>
-          <td>200</td>
+        <tr>
+          <td><details class="det">
+            <summary>Tarek Essam</summary>
+          </details></td>
+          <td>30</td>
         </tr>
-        <tr class="success">
-          <td><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/add.png" width="10" height="10"></a> Amr Esaam</td>
-          <td>500</td>
+        <tr>
+          <td><details class="det">
+            <summary>Amr Essam</summary>
+          </details></td>
+          <td>50</td>
         </tr>
-        <tr class="active">
-          <td><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/add.png" width="10" height="10"></a> Mohamed Assem</td>
-          <td>80</td>
+        <tr>
+          <td><details class="det">
+            <summary>Mohamed Assem</summary>
+          </details></td>
+          <td>70</td>
         </tr>
       </tbody>
     </table>
+  </div>
+<br>
+
+  <div id="table2" class="container" style="display:block">
+    <table class="table table-bordered">
+      <thead>
+        <tr class="bg-primary">
+          <th class="col-md-5">Name</th>
+          <th class="col-md-5">Total Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><details>
+            <summary>Mina Nasr</summary>
+          </details></td>
+          <td>20</td>
+        </tr>
+        <tr>
+          <td><details>
+            <summary>Tarek Essam</summary>
+          </details></td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <td><details>
+            <summary>Amr Essam</summary>
+          </details></td>
+          <td>50</td>
+        </tr>
+        <tr>
+          <td><details>
+            <summary>Mohamed Assem</summary>
+          </details></td>
+          <td>70</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="imagesdiv" class="container" style="display:block">
+    <div class="row">
+      <div>
+        <figure>
+          <img src='images/cup.png' width="60" height="60"/>
+          <figcaption>Tea <br />1<br />Price 5 L.E</figcaption>
+        </figure>
+        <figure>
+          <img src='images/cup.png' width="60" height="60"/>
+          <figcaption>Coffe <br />1<br />Price 6 L.E</figcaption>
+        </figure>
+        <figure>
+          <img src='images/cup.png' width="60" height="60"/>
+          <figcaption>Nescafe <br />1<br />Price 8 L.E</figcaption>
+        </figure>
+        <figure>
+          <img src='images/cup.png' width="60" height="60"/>
+          <figcaption>Cola <br />1<br />Price 8 L.E</figcaption>
+        </figure>
+      </div>
+    </div>
   </div>
 
   <div class="container">
@@ -103,5 +190,8 @@
     <li><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/next.png" width="20" height="20"></a></li>
   </ul>
 </div>
+
+<script src="page9.js"></script>
+
 </body>
 </html>
