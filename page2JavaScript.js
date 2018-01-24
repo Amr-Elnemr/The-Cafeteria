@@ -13,44 +13,54 @@ function addOrder(event){
 
             if(ordersNames[i].children[0].textContent === product[0]){
 
-                ordersNames[i].children[1].value = Number(ordersNames[i].children[1].value) + 1;
-                let sum = ordersNames[i].children[2].textContent;
+                ordersNames[i].children[1].children[0].value = Number(ordersNames[i].children[1].children[0].value) + 1;
+                let sum = ordersNames[i].children[2].children[0].textContent;
                 sum = sum.split(" ");
                 sum = Number(sum[1]) + Number(product[1]);
                 totalOrders[`${product[0]}`] = sum;
-                ordersNames[i].children[2].innerHTML = "EPG " + sum;
+                ordersNames[i].children[2].children[0].innerHTML = "EPG " + sum;
                 computeCheck();
                 return;
             }
         }
 
-        let order = document.createElement('div');
-        let orderName = document.createElement('p');
+        let order = document.createElement('tr');
+        let orderName = document.createElement('b');
+        let orderNameCol = document.createElement('td');
         let amount = document.createElement("input");
-        let price = document.createElement("p");
+        let amountCol = document.createElement('td');
+        let price = document.createElement("b");
+        let priceCol = document.createElement('td');
         let remove = document.createElement("button");
+        let removeCol = document.createElement('td');
 
         amount.type = "number";
         amount.value = "1";
         amount.min = "1";
         amount.onkeydown="return false";
+        amountCol.appendChild(amount);
 
         orderName.textContent = product[0];
         orderName.setAttribute("name", event.target.name);
-        orderName.style.display = "inline-block";
+        orderNameCol.appendChild(orderName);
+        orderNameCol.style["background-color"] ="#0f0";
+        //orderName.style.display = "inline-block";
 
         price.style.display = "inline-block";
         price.textContent = "EPG " + product[1];
+        priceCol.appendChild(price);
 
         remove.textContent = "remove";
         remove.id = product[0];
+        removeCol.appendChild(remove);
 
         order.classList.add("ordersnames");
 
-        order.appendChild(orderName);
-        order.appendChild(amount);
-        order.appendChild(price);
-        order.appendChild(remove);
+        order.appendChild(orderNameCol);
+        order.appendChild(amountCol);
+        order.appendChild(priceCol);
+        order.appendChild(removeCol);
+        order.style['margin-bottom'] = "25px"
         orders.appendChild(order);
 
         totalOrders[`${product[0]}`] = product[1];
@@ -63,10 +73,12 @@ function addOrder(event){
 }
 
 function remove(event){
-    if(event.target.tagName === "BUTTON"){        
+    if(event.target.tagName === "BUTTON"){
         let order = document.getElementById(event.target.getAttribute("id"));
         order = order.parentElement;
+        order = order.parentElement;
         let orderName = order.children[0];
+        orderName = orderName.children[0];
         orderName = orderName.getAttribute("name");
         orderName = orderName.split("-");
         delete totalOrders[`${orderName[0]}`];

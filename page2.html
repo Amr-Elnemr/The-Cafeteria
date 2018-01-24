@@ -16,20 +16,22 @@
             </div>
             <div class="row">
 
-                <div class="panel panel-default col-lg-4" style="height: 800px;" >
+                <div class="panel panel-default col-lg-5" style="height: 800px;"  >
                     <div class="panel-heading" style="height: 7%" align="center">
                         <p>Order</p>
                     </div>
                     <div class="panel-body" style="height: 80%" id="panel">
-                        <div id="orders">
+                        <div >
+                            <table id="orders" border="solid">
 
+                            </table>
                         </div>
                         <div id="notes" style="display: none">
-                            <p style="position: relative; top: 40%">Notes</p>
-                            <textarea name="notes" class="form-control" rows ="8" ></textarea>
+                            <!-- <p style="position: relative; top: 40%">Notes</p> -->
+                            <textarea name="notes" placeholder="Notes" class="form-control" rows ="8" style="margin-top: 25px;"></textarea>
                         </div>
                         <div id="room" style="display: none">
-                            <p style="position: relative; top: 40%">Room</p>
+                            <h2 style="position: relative; top: 40%">Room</h2>
                             <select class="form-control" style="position: relative; top: 40%;>
                                 <option value="room1">room1</option>
                                 <option value="room2">room2</option>
@@ -38,8 +40,8 @@
 
 
                     </div>
-                    <div class="panel-footer pull-right">
-                        <p id="totalprice">  EPG 00</p>
+                    <div class="panel-footer">
+                        <h1 id="totalprice">  EPG 00</h1>
                         <button type="button" name="button" class="btn btn-primary">Confirm</button>
                     </div>
                 </div>
@@ -51,7 +53,7 @@
                     </form>
                 </div>
 
-                <div id="products" class="col-lg-8">
+                <div id="products" class="col-lg-7">
                     <div name="firstrow" class="row">
                         <div  class="col-lg-3">
                             <img name="cake-50" src="cake.jpg" width="100" >
