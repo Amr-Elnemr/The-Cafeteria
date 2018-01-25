@@ -11,40 +11,46 @@
             <div class="page-header">
                 <a href="#" class="btn btn-info btn-sm " >Home</a>
                 <a href="#" class="btn btn-info btn-sm " >My Orders</a>
-                <img src="profile.png" width="40" class="pull-right">
+                <img src="images/profile.png" width="40" class="pull-right">
                 <a href="#" class="pull-right" style="text-align: center">Name</a>
             </div>
             <div class="row">
-
-                <div class="panel panel-default col-lg-5" style="height: 800px;"  >
-                    <div class="panel-heading" style="height: 7%" align="center">
-                        <p>Order</p>
-                    </div>
-                    <div class="panel-body" style="height: 80%" id="panel">
-                        <div >
-                            <table id="orders" border="solid">
-
-                            </table>
+                <form class="" action="php/order.php" method="post">
+                    <div class="panel panel-default col-lg-5" style="height: 800px;"  >
+                        <div class="panel-heading" style="height: 7%" align="center">
+                            <p>Order</p>
                         </div>
-                        <div id="notes" style="display: none">
-                            <!-- <p style="position: relative; top: 40%">Notes</p> -->
-                            <textarea name="notes" placeholder="Notes" class="form-control" rows ="8" style="margin-top: 25px;"></textarea>
-                        </div>
-                        <div id="room" style="display: none">
-                            <h2 style="position: relative; top: 40%">Room</h2>
-                            <select class="form-control" style="position: relative; top: 40%;>
-                                <option value="room1">room1</option>
-                                <option value="room2">room2</option>
-                            </select>
-                        </div>
+                        <div class="panel-body" style="height: 80%" id="panel">
+
+                                <div >
+                                    <table id="orders" border="solid">
+
+                                    </table>
+                                </div>
+                                <div id="notes" style="display: none">
+                                    <!-- <p style="position: relative; top: 40%">Notes</p> -->
+                                    <textarea name="notes" placeholder="Notes" class="form-control" rows ="8" style="margin-top: 25px;"></textarea>
+                                </div>
+                                <div id="room" style="display: none">
+                                    <h2 style="position: relative; top: 40%">Room</h2>
+                                    <select name="room" class="form-control" style="position: relative; top: 40%;>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                </div>
+
+
+                            </div>
+                            <div class="panel-footer">
+                                <h1 id="totalprice">  EPG 00</h1>
+                                <button type="submit"  class="btn btn-primary">Confirm</button>
+                            </div>
+
 
 
                     </div>
-                    <div class="panel-footer">
-                        <h1 id="totalprice">  EPG 00</h1>
-                        <button type="button" name="button" class="btn btn-primary">Confirm</button>
-                    </div>
-                </div>
+
+                </form>
 
                 <div class="row search-container pull-right">
                     <form action="#">
@@ -80,7 +86,7 @@
 
 
 
-       <script src="page2JavaScript.js"></script>
+       <script src="js/page2JavaScript.js"></script>
 
 
 
