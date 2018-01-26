@@ -30,7 +30,8 @@ body{
 #adm{
 	text-align: right;
 	font-weight: bold;
-	margin-left: 30%;
+	position: relative;
+	right: -35%;
 	
 }
 
@@ -44,7 +45,7 @@ body{
 #addProduct{
 	text-align: right;
 	position: relative;
-	left: 51%;
+	right: -53%;
 	font-weight: bold;
 	color: blue;
 }
@@ -52,7 +53,7 @@ body{
 #addUser{
 	text-align: right;
 	position: relative;
-	left: 56%;
+	left: 58%;
 	font-weight: bold;
 	color: blue;
 }
@@ -84,3 +85,9 @@ td{
 .cakes{
 	width: 2%;
 }
+
+td > a{
+	border-right: 10px solid white;
+	font-weight: bold;
+}
+
