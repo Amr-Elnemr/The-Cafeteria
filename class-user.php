@@ -8,16 +8,6 @@ class user{
 	protected $image;
 	protected $username;
 
-	// public function get($value){
-	// 	return $this->$value;
-	// }
-	// public function set($name,$value){
-	// 	$this->$name=$value;
-	// }
-
-
-	
-
 
 	public function __get($attr){
 		switch ($attr) {
@@ -77,9 +67,6 @@ class user{
 		$dsn="mysql:host=localhost;dbname=cafeteria";
 		$db=new PDO($dsn,"root","");
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		// $users="select * from users where email=?";
-		// $statement=$db->prepare($users);
-		// $statement->execute([$loginEmail]);
 		$statement=$db->query("select * from users where email="."'".$em."'");
 		
 
@@ -87,13 +74,12 @@ class user{
 
 		$fetched_arr=$statement->fetch(PDO::FETCH_ASSOC);
 		$db_hashedPwd=$fetched_arr['hashed_pwd'];
-		// echo $db_hashedPwd."<br>";
-		// echo $loginPwd;
-		// $loginHashedPwd=md5($loginPwd);
+		
+		// don't forget that we will compare with hashed password
 	
 				if($fetched_arr){
 					if(test_input($pas)!=test_input($db_hashedPwd)){
-					header("Location: class-user.php?password=invalid");
+					header("Location: login.php?password=invalid");
 					}
 					else{
 						echo "hello";
@@ -102,7 +88,7 @@ class user{
 				}
 				else
 				{
-					header("Location: class-user.php?email=invalid");
+					header("Location: login.php?email=invalid");
 				}
 				
 	}
@@ -110,15 +96,6 @@ class user{
 
 	public function cancelBefore10min($id){
 
-		
-		// test input
-
-		// function test_input($data) {
-		// 	  $data = trim($data);
-		// 	  $data = stripslashes($data);
-		// 	  $data = htmlspecialchars($data);
-		// 	  return $data;
-		// 	}
 
 		//connection with database
 
@@ -130,6 +107,7 @@ class user{
 
 		
 		date_default_timezone_set('Africa/Cairo');
+		
 		//getting database time and date
 		$db_date=$fetched_arr['date'];
 		$db_time=$fetched_arr['time'];
@@ -158,7 +136,7 @@ class user{
 		$diff=dateDifference($current_datetime,$db_datetime);
 
 
-		//check
+		//check if the order has been submiited since more than 10 mins or not:
 
 		if(test_input($current_date)==test_input($db_date)){
 			if(test_input($diff)<10){
@@ -174,6 +152,10 @@ class user{
 		}
 	}
 
+	public function(){
+
+	}
+
 }	
 
 
@@ -185,35 +167,6 @@ $obj=new user();
 $obj->__set("name","mina");
 $namee=$obj->__get("name");
 echo $namee;
-// date_default_timezone_set('Africa/Cairo');
-// $current=date("Y-m-d h:i:s");
-// $data="2017-05-12";
-// $time="10:15:05";
-// $datatime=$data." ".$time;
-// echo $datatime;
-// $start = strtotime('2017-08-10 10:05:25');
-// $end   = strtotime('2017-08-10 10:15:25');
-// $date1=date_create($current);
-// $date2=date_create($datatime);
-// $diff=date_diff($date1,$date2);
-// echo "current= ".$current."<br>"."time= ".$datatime."<br>"."the differnece= ".$diff."<br>";
-// echo $diff;
-
-
-
-// function dateDifference($date_1 , $date_2 , $differenceFormat = '%i' )
-// {
-//     $datetime1 = date_create($date_1);
-//     $datetime2 = date_create($date_2);
-   
-//     $interval = date_diff($datetime1, $datetime2);
-   
-//     return $interval->format($differenceFormat);
-   
-// }
-
-// $date=dateDifference($current,$datatime);
-// echo "current= ".$current."<br>"."time= ".$datatime."<br>"."the differnece= ".$date."<br>";
 
 
 $obj->authenticateUser($_POST['email'],$_POST['password']);
