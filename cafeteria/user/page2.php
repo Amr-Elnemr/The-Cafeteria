@@ -1,3 +1,7 @@
+<?php
+    session_start();
+ ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,13 +13,13 @@
         <div class="container">
 
             <div class="page-header">
-                <a href="#" class="btn btn-info btn-sm " >Home</a>
-                <a href="#" class="btn btn-info btn-sm " >My Orders</a>
-                <img src="images/profile.png" width="40" class="pull-right">
+                <a href="products.php" class="btn btn-info btn-sm " >Home</a>
+                <a href="user.php?show=true" class="btn btn-info btn-sm" >My Orders</a>
+                <img src="../imgs/profile.png" width="40" class="pull-right">
                 <a href="#" class="pull-right" style="text-align: center">Name</a>
             </div>
             <div class="row">
-                <form class="" action="php/order.php" method="post">
+                <form class="" action="user.php" method="post">
                     <div class="panel panel-default col-lg-5" style="height: 800px;"  >
                         <div class="panel-heading" style="height: 7%" align="center">
                             <p>Order</p>
@@ -33,7 +37,7 @@
                                 </div>
                                 <div id="room" style="display: none">
                                     <h2 style="position: relative; top: 40%">Room</h2>
-                                    <select name="room" class="form-control" style="position: relative; top: 40%;>
+                                    <select name="room" class="form-control" style="position: relative; top: 40%;">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                     </select>
@@ -44,6 +48,7 @@
                             <div class="panel-footer">
                                 <h1 id="totalprice">  EPG 00</h1>
                                 <button type="submit"  class="btn btn-primary">Confirm</button>
+                                <input type="hidden" name="neworder" value="true"/>
                             </div>
 
 
@@ -60,39 +65,53 @@
                 </div>
 
                 <div id="products" class="col-lg-7">
-                    <div name="firstrow" class="row">
-                        <div  class="col-lg-3">
-                            <img name="cake-50" src="images/cake.jpg" width="100" >
-                        </div>
 
-                        <div  class="col-lg-3">
-                            <img name="coka-10" src="images/cake.jpg" width="100" >
-                        </div>
-                    </div>
-                    <br /><br /><br />
-                    <div name="secondrow" class="row" >
-                        <div  class="col-lg-3">
-                            <img name="tea-5" src="images/cake.jpg" width="100" >
-                        </div>
-
-                        <div class="col-lg-3">
-                            <img name="molto-3" src="images/cake.jpg" width="100" >
-                        </div>
-                    </div>
                 </div>
             </div>
 
         </div>
+        <script type="text/javascript">
+        // document.addEventListener("beforeunload", function(){
+        //     document.location.href = "products.php";
+        //     console.log("refresh");
+        // });
+        document.onbeforeunload = function(e){
+            // e,preventDefault
+            // document.stop();
+            document.location.href = "products.php";
+            // console.log("refresh");
+        }
+        let products = <?php echo json_encode($_SESSION['products']); ?>;
 
+            let preview = document.getElementById("products");
 
+            for (var i = 0; i < products.length; i++)
+            {
+                product = products[i];
 
-       <script src="js/page2JavaScript.js"></script>
+                figure = document.createElement('figure');
+                caption = document.createElement('figcaption');
+                image = document.createElement('img');
 
+                image.src = product['image'];
+                image.name = product['name'] + "-" + product['price'] ;
+                image.width = "130";
+                image.style.margin = "5px";
 
+                caption.textContent =  product['name'] + " (price " + product['price'] + " EPG)";
 
+                figure.style.display = "inline-block";
+                figure.style.border = "thin silver solid";
+                figure.style.margin = "25px";
+                figure.style['text-align'] = "center";
 
-        <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
-        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+                figure.appendChild(image);
+                figure.appendChild(caption);
+                preview.appendChild(figure);
+
+            }
+        </script>
+       <script src="page2JavaScript.js"></script>
+
     </body>
 </html>

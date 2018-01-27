@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class user{
 	protected $name;
@@ -28,7 +28,7 @@ class user{
 				break;
 			case "username":
 				return $this->username;
-				break;					
+				break;
 		}
 	}
 
@@ -52,12 +52,12 @@ class user{
 				break;
 			case "username":
 				 $this->username=$value;
-				break;					
+				break;
 		}
 	}
 
-	public function authenticateUser($em,$pas)	{
-	
+	public function authenticateUser($em,$pas){
+
 		function test_input($data) {
 			  $data = trim($data);
 			  $data = stripslashes($data);
@@ -68,15 +68,15 @@ class user{
 		$db=new PDO($dsn,"root","");
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$statement=$db->query("select * from users where email="."'".$em."'");
-		
+
 
 		//getting pwd from database
 
 		$fetched_arr=$statement->fetch(PDO::FETCH_ASSOC);
 		$db_hashedPwd=$fetched_arr['hashed_pwd'];
-		
+
 		// don't forget that we will compare with hashed password
-	
+
 				if($fetched_arr){
 					if(test_input($pas)!=test_input($db_hashedPwd)){
 					header("Location: login.php?password=invalid");
@@ -90,7 +90,7 @@ class user{
 				{
 					header("Location: login.php?email=invalid");
 				}
-				
+
 	}
 
 
@@ -105,9 +105,9 @@ class user{
 		$statement=$db->query("select * from orders where order_id="."'".$id."'");
 		$fetched_arr=$statement->fetch(PDO::FETCH_ASSOC);
 
-		
+
 		date_default_timezone_set('Africa/Cairo');
-		
+
 		//getting database time and date
 		$db_date=$fetched_arr['date'];
 		$db_time=$fetched_arr['time'];
@@ -126,11 +126,11 @@ class user{
 		{
 		    $datetime1 = date_create($date_1);
 		    $datetime2 = date_create($date_2);
-		   
+
 		    $interval = date_diff($datetime1, $datetime2);
-		   
+
 		    return $interval->format($differenceFormat);
-		   
+
 		}
 
 		$diff=dateDifference($current_datetime,$db_datetime);
@@ -156,7 +156,7 @@ class user{
 
 	}
 
-}	
+}
 
 
 
