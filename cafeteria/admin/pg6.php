@@ -17,11 +17,11 @@ require_once('page5.php');
 </head>
 <body>
 	<div>
-		<a class="menu" href="">Home</a>
-		<a class="menu" href="">Products</a>
-		<a class="menu" href="">Users</a>
-		<a class="menu" href="">Manual Order</a>
-		<a class="menuLast" href="">Checks</a>
+		<a class="menu" href="order.php">Home</a>
+		<a class="menu" href="pg5.php">Products</a>
+		<a class="menu" href="pg6.php">Users</a>
+		<a class="menu" href="products.php">Manual Order</a>
+		<a class="menuLast" href="class_admin.php">Checks</a>
 
 		<span id='adm'>
 			<img id="usrImg" src="user.png">

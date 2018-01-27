@@ -19,6 +19,5 @@
     }
     $pro = new Product;
     $pro -> show_products();
-    echo "ddddddddddddddddddddddddddd";
-    // header("location: page2.php");
+    header("location: page2.php");
  ?>

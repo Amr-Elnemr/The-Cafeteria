@@ -108,12 +108,14 @@ class admin
 
 }
 
+print_r($_POST);
+
 //////////////MAIN/////////////////////
 $ob = new admin;
 ///////////calling addProduct();
 if(isset($_POST["product"]))
 {
-$ob -> addProduct($_POST["product"], $_POST["price"], $_POST["product pic"]);
+$ob -> addProduct($_POST["product"], $_POST["price"], $_POST["productpic"]);
 }
 
 //////////calling showproducts();
@@ -157,4 +159,4 @@ if (isset($_GET['udid']))
 	$ob -> deleteUser($_GET['udid']);
 	header("location: pg6.php");
 }
-?>
+ ?>

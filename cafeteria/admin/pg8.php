@@ -44,7 +44,7 @@ error_reporting(E_ALL);
 						echo "<p>This Product already exists!!</p>";
 					}
 				?>
-				
+
 			</th>
 		</tr>
 		<tr>
@@ -64,7 +64,8 @@ error_reporting(E_ALL);
 		<tr>
 			<th id="label">Product Picture</th>
 			<th>
-				<input type="file" name="product pic" class="input" id="product-pic-input">
+				<input type="file" name="" class="input" id="product-pic-input">
+				<input type="hidden" name="productpic" value="" id="pic">
 			</th>
 		</tr>
 	</table>
@@ -74,6 +75,20 @@ error_reporting(E_ALL);
 		  	<button type="reset" name="reset" class="button">Reset</button>
 		 </div>
 	</form>
+
+	<script type="text/javascript">
+		let image = document.getElementById('product-pic-input');
+		image.addEventListener("change", addImage);
+
+		function addImage(e) {
+			let name = image.value;
+    		name = name.split('\\');
+    		name = name[2];
+			name = "../imgs/products/" + name;
+			document.getElementById('pic').setAttribute("value", name);
+
+		}
+	</script>
 
 </body>
 </html>

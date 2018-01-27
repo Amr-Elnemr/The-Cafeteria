@@ -30,11 +30,11 @@ figure {
     <b> | </b>
     <a href="pg5.php"><b class="fontfamily">Products</b></a>
       <b> | </b>
-    <a href="#"><b class="fontfamily">Users</b></a>
+    <a href="pg6.php"><b class="fontfamily">Users</b></a>
       <b> | </b>
     <a href="products.php"><b class="fontfamily">Manual Orders</b></a>
       <b> | </b>
-    <a href="#"><b class="fontfamily">Checks</b></a>
+    <a href="class_admin.php"><b class="fontfamily">Checks</b></a>
 
     <b class="pull-right"><br>&nbsp;	&nbsp;	<u>Admin</u></b>
     <img src="../imgs/profile.png" class="img-responsive img-circle pull-right" style="display:inline" width="60" height="60">

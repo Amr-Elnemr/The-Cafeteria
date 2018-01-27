@@ -21,27 +21,36 @@
 
     }
 
-    if($_POST['neworder'] == "true"){
-        echo "fff";
+    if(isset($_POST['neworder']) && $_POST['neworder'] == "true"){
         $order = new Order;
         $order -> insert_order();
         $order -> show_orders();
-        header("location: myorders.php");
         $_POST['neworder'] = "false";
+        header("location: myorders.php");
     }
 
-    if($_GET['delete'] == "true"){
+    if(isset($_GET['delete']) && $_GET['delete'] == "true"){
         $user = new User;
         $order = new Order;
         $user -> cancel_order();
         $order -> show_orders();
         header("location: myorders.php");
     }
-    if($_GET['show'] == "true"){
+    if(isset($_GET['show']) && $_GET['show'] == "true"){
         $order = new Order;
         $order -> show_orders();
         header("location: myorders.php");
     }
+    if(isset($_GET['showbydate']) && $_GET['showbydate'] == "true"){
+        $order = new Order;
+        $order -> show_orders_by_date();
+        header("location: myorders.php");
+
+    }
+
+    $order = new Order;
+    $order -> show_orders();
+    header("location: myorders.php");
 
 
  ?>

@@ -11,12 +11,21 @@
     </head>
     <body>
         <div class="container">
+            <div class="jumbotron">
+                <a href="order.php"><b class="fontfamily">Home</b></a>
+                <b> | </b>
+                <a href="pg5.php"><b class="fontfamily">Products</b></a>
+                  <b> | </b>
+                <a href="pg6.php"><b class="fontfamily">Users</b></a>
+                  <b> | </b>
+                <a href="products.php"><b class="fontfamily">Manual Orders</b></a>
+                  <b> | </b>
+                <a href="class_admin.php"><b class="fontfamily">Checks</b></a>
 
-            <div class="page-header">
-                <a href="page2.html" class="btn btn-info btn-sm " >Home</a>
-                <a href="user.php?show=true" class="btn btn-info btn-sm" >My Orders</a>
-                <img src="../imgs/profile.png" width="40" class="pull-right">
-                <a href="#" class="pull-right" style="text-align: center">Name</a>
+            <b class="pull-right"><br>&nbsp;	&nbsp;	<u>Admin</u></b>
+            <img src="../imgs/profile.png" class="img-responsive img-circle pull-right" style="display:inline" width="60" height="60">
+            <br>
+            <h2 class="fontfamily">Manual Order</h2>
             </div>
             <div class="row">
                 <form class="" action="order.php" method="post">
