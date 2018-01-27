@@ -1,0 +1,86 @@
+body{
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.menu{
+	font-weight: bold;
+	border-right: 2px solid black;
+	padding: 5px;
+	color: blue;
+}
+
+.menuLast {
+    font-weight: bold;
+	padding: 5px;
+	color: blue;
+}
+
+#usrImg{
+	height: 5%;
+	width: 5%;
+	align-self: right;
+	vertical-align: middle;
+}
+
+#usrName{
+	color: blue;
+}
+
+#adm{
+	text-align: right;
+	font-weight: bold;
+	margin-left: 30%;
+	
+}
+
+#title{
+	text-align: left;
+	position: relative;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+#addProduct{
+	text-align: right;
+	position: relative;
+	left: 51%;
+	font-weight: bold;
+	color: blue;
+}
+
+#addUser{
+	text-align: right;
+	position: relative;
+	left: 56%;
+	font-weight: bold;
+	color: blue;
+}
+
+table{
+	width: 74%;
+	text-align: center;
+	border: 3px solid black;
+	border-collapse: collapse;
+	margin-top: 3%;
+}
+
+th{
+	border: 3px solid black;
+}
+
+td{
+	border: 3px solid black;
+}
+
+#line2{
+	margin-top: 3%;
+}
+
+.tdimg{
+	width: 15%;
+}
+
+.cakes{
+	width: 2%;
+}
