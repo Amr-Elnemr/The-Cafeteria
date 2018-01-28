@@ -6,13 +6,26 @@ error_reporting(E_ALL);
 session_start();
 
 $dsn = "mysql:host=localhost;dbname=cafeteria";
-$db = new PDO ($dsn, "tarek", "tito");
-
+$db = new PDO ($dsn, "amr", "amr1990");
+ 
 $db->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
 class admin
 {
+	public function showStored($id)  //to store previous values when running editProduct();
+	{
+		global $db;
+		$query="select name,price,image from products  where product_id=?";
+		$statement=$db->prepare($query);
+		$parameters=[$id];
+		$statement->execute ($parameters);
+		$r=$statement->fetch(PDO::FETCH_ASSOC);	
+		$_SESSION['storName'] = $r['name'];
+		$_SESSION['storPrice'] = $r['price'];
+		$_SESSION['storImage'] = $r['image'];
+	}
+
 	public function addProduct($prod, $pric, $pic) //{pg8.php}
 	{
 		global $db;
@@ -73,6 +86,31 @@ class admin
 		$parameter=[$did];
 		$statement->execute($parameter);
 	}
+/////
+	public function editProduct($prod, $pric, $pic, $eid)
+	{
+		global $db;
+		$duplQuery="select count(name) from products where name=? and product_id!= ?";
+		$duplStatement=$db -> prepare($duplQuery);
+		$namePara=[trim($prod), $eid];
+		$duplStatement->execute($namePara);
+		$check=$duplStatement->fetch(PDO::FETCH_ASSOC);
+		if($check['count(name)']>0)
+		{
+			header("location: pg8.php?dupError=1");
+		}
+		else
+		{
+
+			$query="update products set name= ?, price= ?, image= ? where product_id= ?;";
+			$statement=$db->prepare($query);
+			$parameters=[$prod, $pric, $pic, $eid];
+			$statement->execute ($parameters);
+			unset($_SESSION['eid']);
+			header("location: pg5.php");	
+		}
+		
+	}
 
 
 	public function showUsers() //{to show all users for admin when the pg loads, it returns and associative array of columns arrays}
@@ -108,15 +146,27 @@ class admin
 
 }
 
-print_r($_POST);
-
 //////////////MAIN/////////////////////
 $ob = new admin;
 ///////////calling addProduct();
-if(isset($_POST["product"]))
+if(isset($_POST["product"]) && !isset($_GET['eid']) && !isset($_SESSION['eid']))
 {
-$ob -> addProduct($_POST["product"], $_POST["price"], $_POST["productpic"]);
+	$ob -> addProduct($_POST["product"], $_POST["price"], $_POST["product pic"]);
 }
+
+///////calling editProduct():///////////////////////////////////////////////
+if (isset($_GET['eid']))  ///store eid in session variable and redirect to add product page
+{
+	$_SESSION['eid']=$_GET['eid'];
+	unset($_GET['eid']);
+	$ob -> showStored($_SESSION['eid']);
+	header("location: pg8.php?");
+}
+if(isset($_POST["product"]) && isset($_SESSION['eid']))
+{
+	$ob -> editProduct($_POST["product"], $_POST["price"], $_POST["product pic"], $_SESSION['eid']);
+}
+
 
 //////////calling showproducts();
 $ret=$ob -> showProducts();
@@ -142,7 +192,6 @@ if (isset($_GET['did']))
 	header("location: pg5.php");
 }
 
-
 //////////calling showusers();
 $res=$ob -> showUsers();
 $_SESSION['uids']=$res['ids'];
@@ -159,4 +208,4 @@ if (isset($_GET['udid']))
 	$ob -> deleteUser($_GET['udid']);
 	header("location: pg6.php");
 }
- ?>
+?>

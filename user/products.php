@@ -4,7 +4,7 @@
 
 <?php
     $dsn = "mysql:host=localhost;dbname=cafeteria";
-    $db = new PDO($dsn, "tarek", "tito");
+    $db = new PDO($dsn, "amr", "amr1990");
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     class Product
     {
@@ -16,18 +16,8 @@
             $_SESSION['products'] = $products;
 
         }
-
-        public function get_users()
-        {
-            global $db;
-            $users = $db -> query("SELECT name FROM users");
-            $users = $users -> fetchAll(PDO::FETCH_ASSOC);
-            $_SESSION['users'] = $users;
-            print_r($users);
-        }
     }
     $pro = new Product;
     $pro -> show_products();
-    $pro -> get_users();
-    header("location: manualOrder.php");
+    header("location: page2.php");
  ?>

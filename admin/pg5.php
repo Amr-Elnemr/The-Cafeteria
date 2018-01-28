@@ -32,7 +32,7 @@ require_once('page5.php');
 
 	<div id="line2">
 		<a id="title">All Products</a>
-		<span><a id="addProduct" href="pg8.php">Add product</a></span>
+		<span><a id="addProduct" href="pg8.php?add=1">Add product</a></span>
 	</div>
 
 	<table>
@@ -137,6 +137,6 @@ require_once('page5.php');
 
 	</script>
 <!-- -------------------------------------------------------- -->
-	<!-- <script type="text/javascript" src="pg5js.php"></script> -->
+
 </body>
 </html>

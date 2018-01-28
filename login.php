@@ -5,7 +5,7 @@
 	<title>login form</title>
 	<meta charset="utf-8">
 	<style type="text/css">
-		
+
 		#form-container{
 			text-align: center;
 		}
@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div id="form-container">
-		<form id="form" action="class-user.php" method="POST">
+		<form id="form" action="userType.php" method="POST">
 			<div id="header">
 				<h2>Login Form</h2>
 			</div>
@@ -32,6 +32,3 @@
 	</div>
 </body>
 </html>
-
-
-

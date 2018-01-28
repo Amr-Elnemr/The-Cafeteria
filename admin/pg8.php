@@ -2,6 +2,17 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+session_start();
+
+if(isset($_GET['add']) && ($_GET['add']==1))
+{
+	unset($_SESSION['storName']); //to remove any stored values through editProduct();
+	unset($_SESSION['storPrice']);
+	unset($_SESSION['storImage']);
+	unset($_SESSION['eid']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -16,11 +27,11 @@ error_reporting(E_ALL);
 
 
 	<div>
-		<a class="menu" href="">Home</a>
+		<a class="menu" href="order.php">Home</a>
 		<a class="menu" href="pg5.php">Products</a>
-		<a class="menu" href="">Users</a>
-		<a class="menu" href="">Manual Order</a>
-		<a class="menuLast" href="">Checks</a>
+		<a class="menu" href="pg6.php">Users</a>
+		<a class="menu" href="products.php">Manual Order</a>
+		<a class="menuLast" href="class_admin.php">Checks</a>
 
 		<span id='adm'>
 			<img id="usrImg" src="user.png">
@@ -29,14 +40,14 @@ error_reporting(E_ALL);
 	</div>
 
 	 <div id="line2">
-		<a id="title">Add Product</a>
+		<a id="title"><?php if(isset($_SESSION['storName'])){echo "Edit User";} else {echo "Add User";}?></a>
 	</div>
 
 	<form method="post" action="page5.php">
 	<table>
 		<tr>
-			<th id="label">Product</th>
-			<th><input type="type" name="product" required></th>
+			<th id="prodLab">Product</th>
+			<th><input type="type" name="product" id="prodIn" required value="<?php if(isset($_SESSION['storName'])){echo $_SESSION['storName'];}?>"></th>
 			<th>
 				<?php
 					if(isset($_GET['dupError']))
@@ -48,8 +59,8 @@ error_reporting(E_ALL);
 			</th>
 		</tr>
 		<tr>
-			<th id="label">Price</th>
-			<th><input type="number" name="price" required><span id="egp">EGP</span>
+			<th id="priceLab">Price</th>
+			<th><input type="number" name="price" required value="<?php if(!empty($_SESSION['storPrice'])){echo $_SESSION['storPrice'];}?>"><span id="egp">EGP</span>
 			</th>
 		</tr>
 		<tr>
@@ -62,9 +73,9 @@ error_reporting(E_ALL);
 	  		</th>
 		</tr>
 		<tr>
-			<th id="label">Product Picture</th>
+			<th id="picLab">Product Picture</th>
 			<th>
-				<input type="file" name="" class="input" id="product-pic-input">
+				<input type="file" name="" class="input" id="product-pic-input" value="<?php if(!empty($_SESSION['storImage'])){echo $_SESSION['storImage'];}?>">
 				<input type="hidden" name="productpic" value="" id="pic">
 			</th>
 		</tr>

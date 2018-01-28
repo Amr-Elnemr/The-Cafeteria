@@ -4,7 +4,7 @@
 <?php
 
     $dsn="mysql:host=localhost;dbname=cafeteria";
-    $db=new PDO($dsn,"root","");
+    $db=new PDO($dsn,"amr","amr1990");
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     function test_input($data) {

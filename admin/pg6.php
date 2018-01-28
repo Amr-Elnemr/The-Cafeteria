@@ -68,7 +68,10 @@ class admin
 				var rom=document.createElement("td");
 				rom.textContent=room;
 				var image=document.createElement("td");
-				image.textContent=imag;
+				var pic = document.createElement("img");
+				pic.src = imag;
+				pic.width = "50";
+				image.appendChild(pic);
 				var extl=document.createElement("td");
 				extl.textContent=ext;
 				var actions=document.createElement("td");

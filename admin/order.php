@@ -5,7 +5,7 @@
 <?php
     // require_once(config.php);
     $dsn = "mysql:host=localhost;dbname=cafeteria";
-    $db = new PDO($dsn, "tarek", "tito");
+    $db = new PDO($dsn, "amr", "amr1990");
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     class Order
     {
