@@ -1,5 +1,8 @@
 <?php
+ob_start();
     session_start();
+    if(! isset($_SESSION['userInfo']))
+        header("location: ../login.php");
  ?>
 <!DOCTYPE html>
 <html>
@@ -36,15 +39,15 @@ figure {
       <b> | </b>
     <a href="class_admin.php"><b class="fontfamily">Checks</b></a>
 
-    <b class="pull-right"><br>&nbsp;	&nbsp;	<u>Admin</u></b>
-    <img src="../imgs/profile.png" class="img-responsive img-circle pull-right" style="display:inline" width="60" height="60">
+    <b class="pull-right"><br>&nbsp;	&nbsp;	<u id="admin"></u></b>
+    <img id="adminimage" class="img-responsive img-circle pull-right" style="display:inline" width="60" height="60">
     <br>
     <h2 class="fontfamily">Orders</h2>
     </div>
   </div>
 
   <div class="container">
-    <table class="table table-bordered">
+    <!-- <table class="table table-striped">
 
       <thead >
         <tr class="bg-primary">
@@ -55,10 +58,11 @@ figure {
           <th class="col-md-2">Action</th>
         </tr>
       </thead>
-      <tbody id="orderinfo" align="center">
 
-      </tbody>
-    </table>
+    </table> -->
+    <div id="orderinfo" align="center">
+
+    </div>
   </div>
   <div id="imagesdiv" class="container" style="display:block">
     <div class="row">
@@ -68,6 +72,9 @@ figure {
     </div>
   </div>
   <script type="text/javascript">
+      let currentUser = <?php echo json_encode($_SESSION['userInfo']); ?>;
+      document.getElementById("admin").textContent = currentUser['name'];
+      document.getElementById("adminimage").src = currentUser['image'];
       window.addEventListener("beforeunload", function() {
           window.location.href = "order.php";
       });
@@ -78,6 +85,26 @@ figure {
       for (let i = 0; i < orders.length; i++) {
           order = orders[i];
           order_detail = orders_detail[i];
+          table = document.createElement('table');
+          table.classList.add("table");
+          head = document.createElement('thead');
+          mainRow = document.createElement('tr');
+          mainRow.classList.add("bg-primary");
+          th1 = document.createElement('th');
+          th2 = document.createElement('th');
+          th3 = document.createElement('th');
+          th4 = document.createElement('th');
+          th5 = document.createElement('th');
+          th1.textContent = "Order Date";
+          th2.textContent = "Name";
+          th3.textContent = "Room";
+          th4.textContent = "Ext.";
+          th5.textContent = "Action";
+          mainRow.appendChild(th1);
+          mainRow.appendChild(th2);
+          mainRow.appendChild(th3);
+          mainRow.appendChild(th4);
+          mainRow.appendChild(th5);
           row = document.createElement('tr');
           date = document.createElement('td');
           n = document.createElement('td');
@@ -100,44 +127,47 @@ figure {
           row.appendChild(roomNo);
           row.appendChild(phone);
           row.appendChild(action);
+          table.appendChild(mainRow);
+          table.appendChild(row);
+          orderInfo.appendChild(table);
 
-          orderInfo.appendChild(row);
+          row = document.createElement('div');
 
-          row = document.createElement('tr');
-          col = document.createElement('td');
-          col.setAttribute('colspan', "5");
+          row.classList.add("col-md-12");
+
           for (let i = 0; i < order_detail.length; i++) {
               product = order_detail[i];
-              // console.log(product);
-
-
+              // col = document.createElement('td');
               figure = document.createElement('figure');
               caption = document.createElement('figcaption');
               image = document.createElement('img');
 
               image.src = product['image'];
-              image.width = "100";
-              // image.style.margin = "20px";
+              image.width = "40";
+              image.height = "40"
+              image.style.dispaly = 'inline'
 
-              figure.style.border = "thin silver solid";
-              figure.style['margin'] = "30px";
+              figure.style['margin'] = "5px";
               figure.style['text-align'] = "center";
 
               caption.textContent =  product['name'] + " (price " + product['price'] + " EPG)";
 
               figure.appendChild(image);
               figure.appendChild(caption);
-              col.appendChild(figure);
-              row.appendChild(col);
+              // col.appendChild(figure);
+              row.appendChild(figure);
 
           }
-          s = document.createElement("br");
+
+          // s = document.createElement("br");
           total = document.createElement("h3");
-          total.classList.add("pull-right");
+          // total.classList.add("pull-right");
           // total.classList.add("bottom-align-text");
           total.textContent = "total : " + order['total'] + " EPG";
-          col.appendChild(s);
-          col.appendChild(total);
+
+          // col.appendChild(s);
+          row.appendChild(total);
+
           orderInfo.appendChild(row);
       }
 

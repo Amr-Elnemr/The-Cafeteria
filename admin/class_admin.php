@@ -1,10 +1,13 @@
 <?php
+ob_start();
 session_start();
+if(! isset($_SESSION['userInfo']))
+    header("location: ../login.php");
  ?>
   <?php
 
-  $dsn = "mysql:host=localhost;dbname=cafeteria";
-  $db = new PDO($dsn, 'amr', 'amr1990');
+  $dsn = "mysql:host=localhost;dbname=id4446548_omgamalcafeteria";
+  $db = new PDO($dsn, 'id4446548_tarekessam', 'comeflywithme');
   $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   class admin {
@@ -119,35 +122,39 @@ public function retrive_product_content($orderid)
     $admin1 = new admin;
     date_default_timezone_set('Africa/Cairo');
     $currentday = @date('Y-m-d');
-    // $allpayments = $admin1->retrive_allusers_payments('2000-01-01',"$currentday");
-    // $_SESSION['allpayment'] = $allpayments;
+    if (!isset($_GET['datefrom']) && !isset($_GET['dateto']) && !isset($_GET['name']) && !isset($_GET['orderid'])) {
+      $allpayments = $admin1->retrive_allusers_payments('2000-01-01',"$currentday");
+      $_SESSION['allpayment'] = $allpayments;
+      // unset($_SESSION['orders']);
+      // unset($_SESSION['content']);
+    }
     if (isset($_GET['datefrom']) && isset($_GET['dateto']) && ((isset($_GET['uname'])) && $_GET['uname'] != 'all')) {
-          $allpayments = $admin1->retrive_user_payment($_GET['datefrom'],$_GET['dateto'],$_GET['uname']);
-          echo "onepayments";
-          $_SESSION['allpayment'] = $allpayments;
-          unset($_SESSION['orders']);
-          unset($_SESSION['content']);
-        }
-        if (isset($_GET['datefrom']) && isset($_GET['dateto']) && ((isset($_GET['uname'])) && $_GET['uname'] == 'all')) {
-          $allpayments = $admin1->retrive_allusers_payments($_GET['datefrom'],$_GET['dateto']);
-          echo "allpayments";
-          $_SESSION['allpayment'] = $allpayments;
-          unset($_SESSION['orders']);
-          unset($_SESSION['content']);
-        }
+      $allpayments = $admin1->retrive_user_payment($_GET['datefrom'],$_GET['dateto'],$_GET['uname']);
+      echo "onepayments";
+      $_SESSION['allpayment'] = $allpayments;
+      unset($_SESSION['orders']);
+      unset($_SESSION['content']);
+    }
+    if (isset($_GET['datefrom']) && isset($_GET['dateto']) && ((isset($_GET['uname'])) && $_GET['uname'] == 'all')) {
+      $allpayments = $admin1->retrive_allusers_payments($_GET['datefrom'],$_GET['dateto']);
+      echo "allpayments";
+      $_SESSION['allpayment'] = $allpayments;
+      unset($_SESSION['orders']);
+      unset($_SESSION['content']);
+    }
 
-        if(isset($_GET['name']) && !empty($_GET['name'])) {
-          $userorders = $admin1->retrive_user_orders($_GET['datefrom'],$_GET['dateto'],$_GET['name']);
-          echo "oneorder";
-          $_SESSION['orders'] = $userorders;
+    if(isset($_GET['name']) && !empty($_GET['name'])) {
+      $userorders = $admin1->retrive_user_orders($_GET['datefrom'],$_GET['dateto'],$_GET['name']);
+      echo "oneorder";
+      $_SESSION['orders'] = $userorders;
 
-        }
-        if(isset($_GET['orderid']) && !empty($_GET['orderid'])) {
-          $ordercontent = $admin1->retrive_product_content($_GET['orderid']);
-          echo "product content";
-          $_SESSION['content'] = $ordercontent;
+    }
+    if(!isset($_GET['datefrom']) && !isset($_GET['dateto']) && isset($_GET['orderid']) && !empty($_GET['orderid'])) {
+      $ordercontent = $admin1->retrive_product_content($_GET['orderid']);
+      echo "product content";
+      $_SESSION['content'] = $ordercontent;
 
-        }
+    }
 
     header('Location: page9.php');
   ?>

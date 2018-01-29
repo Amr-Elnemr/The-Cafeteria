@@ -1,13 +1,14 @@
 <?php
+ob_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
 
-$dsn = "mysql:host=localhost;dbname=cafeteria";
-$db = new PDO ($dsn, "amr", "amr1990");
- 
+$dsn = "mysql:host=localhost;dbname=id4446548_omgamalcafeteria";
+$db = new PDO ($dsn, "id4446548_tarekessam", "comeflywithme");
+
 $db->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
@@ -20,7 +21,7 @@ class admin
 		$statement=$db->prepare($query);
 		$parameters=[$id];
 		$statement->execute ($parameters);
-		$r=$statement->fetch(PDO::FETCH_ASSOC);	
+		$r=$statement->fetch(PDO::FETCH_ASSOC);
 		$_SESSION['storName'] = $r['name'];
 		$_SESSION['storPrice'] = $r['price'];
 		$_SESSION['storImage'] = $r['image'];
@@ -47,6 +48,26 @@ class admin
 			header("location: pg5.php");
 		}
 	}
+
+	public function showUsers() //{to show all users for admin when the pg loads, it returns and associative array of columns arrays}
+    {
+        global $db;
+        $showusers= $db->query("select * from users");
+        $idArr=array();
+        $nameArr=array();
+        $roomArr=array();
+        $imgArr=array();
+        $extArr=array();
+        while ($row=$showusers->fetch(PDO::FETCH_ASSOC))
+            {
+                array_push($idArr, $row['user_id']);
+                array_push($nameArr, $row['name']);
+                array_push($roomArr, $row['default_room']);
+                array_push($imgArr, $row['image']);
+                array_push($extArr, $row['phone']);
+            }
+        return array('ids'=>$idArr, 'names'=>$nameArr, 'rooms'=>$roomArr, 'images'=> $imgArr, 'ext'=>$extArr);
+    }
 
 
 	public function showProducts() //{to show all products for admin when the pg loads, it returns and associative array of columns arrays}
@@ -107,32 +128,10 @@ class admin
 			$parameters=[$prod, $pric, $pic, $eid];
 			$statement->execute ($parameters);
 			unset($_SESSION['eid']);
-			header("location: pg5.php");	
+			header("location: pg5.php");
 		}
-		
+
 	}
-
-
-	public function showUsers() //{to show all users for admin when the pg loads, it returns and associative array of columns arrays}
-	{
-		global $db;
-		$showusers= $db->query("select * from users");
-		$idArr=array();
-		$nameArr=array();
-		$roomArr=array();
-		$imgArr=array();
-		$extArr=array();
-		while ($row=$showusers->fetch(PDO::FETCH_ASSOC))
-			{
-				array_push($idArr, $row['user_id']);
-				array_push($nameArr, $row['name']);
-				array_push($roomArr, $row['default_room']);
-				array_push($imgArr, $row['image']);
-				array_push($extArr, $row['phone']);
-			}
-		return array('ids'=>$idArr, 'names'=>$nameArr, 'rooms'=>$roomArr, 'images'=> $imgArr, 'ext'=>$extArr);
-	}
-
 
 	public function deleteUser($id) //{to delete user upon admin click, it takes the user id from the query and returns nothing}
 	{
@@ -192,7 +191,7 @@ if (isset($_GET['did']))
 	header("location: pg5.php");
 }
 
-//////////calling showusers();
+
 $res=$ob -> showUsers();
 $_SESSION['uids']=$res['ids'];
 $_SESSION['names']=$res['names'];

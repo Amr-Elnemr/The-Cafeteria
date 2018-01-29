@@ -1,6 +1,7 @@
 document.getElementById("products").addEventListener("click", addOrder);
 document.getElementById("panel").addEventListener("input", increaseOrder);
 document.getElementById("panel").addEventListener("click", remove);
+
 let orders = document.getElementById('orders');
 let totalOrders = {};
 
@@ -11,7 +12,7 @@ function addOrder(event){
         let ordersNames = document.getElementsByClassName("ordersnames");
         for(let i = 0; i < ordersNames.length; i++){
 
-            if(ordersNames[i].children[0].textContent === product[0]){
+            if(ordersNames[i].children[0].children[0].textContent === product[0]){
 
                 ordersNames[i].children[1].children[0].value = Number(ordersNames[i].children[1].children[0].value) + 1;
                 let sum = ordersNames[i].children[2].children[0].textContent;
@@ -49,7 +50,7 @@ function addOrder(event){
         orderName.textContent = product[0];
         orderName.setAttribute("name", event.target.name);
         orderNameCol.appendChild(orderName);
-        orderNameCol.style["background-color"] ="#0f0";
+        // orderNameCol.style["background-color"] ="#99d6ff";
         //orderName.style.display = "inline-block";
 
         price.style.display = "inline-block";
@@ -58,6 +59,7 @@ function addOrder(event){
 
         remove.textContent = "remove";
         remove.id = product[0];
+        remove.setAttribute('class','btn btn-primary');
         removeCol.appendChild(remove);
 
         order.classList.add("ordersnames");
@@ -98,15 +100,17 @@ function remove(event){
 
 function increaseOrder(event){
     let newNumber = event.target.value;
-    if(typeof newNumber == "number"){
-        let order = event.target.parentElement.parentElement.children;
-        let product = order[0].children[0].getAttribute("name");
-        product = product.split("-");
-        let sum = Number(product[1]) * Number(newNumber);
-        totalOrders[`${product[0]}`] = sum;
-        computeCheck();
-        order[2].children[0].innerHTML = "EPG " + sum;
-    }
+    // if(typeof newNumber == "number"){
+    let order = event.target.parentElement.parentElement.children;
+    console.log(order);
+    let product = order[0].children[0].getAttribute("name");
+    product = product.split("-");
+    let sum = Number(product[1]) * Number(newNumber);
+    totalOrders[`${product[0]}`] = sum;
+    computeCheck();
+    order[2].children[0].innerHTML = "EPG " + sum;
+
+    // }
 }
 
 function computeCheck() {

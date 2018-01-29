@@ -1,4 +1,5 @@
 <?php
+ob_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -13,72 +14,69 @@ require_once('page5.php');
 <html>
 <head>
 	<title>All products</title>
-	<link rel="stylesheet" type="text/css" href="pg5.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+    <style>
+      .fontfamily{
+        font-family: "Allerta Stencil", Sans-serif;
+      }
+	  </style>
 </head>
 <body>
-	<div>
-		<a class="menu" href="order.php">Home</a>
-		<a class="menu" href="pg5.php">Products</a>
-		<a class="menu" href="pg6.php">Users</a>
-		<a class="menu" href="products.php">Manual Order</a>
-		<a class="menuLast" href="class_admin.php">Checks</a>
+	<div class="container">
+      <div class="jumbotron">
+      <a href="order.php"><b class="fontfamily">Home</b></a>
+      <b> | </b>
+      <a href="pg5.php"><b class="fontfamily">Products</b></a>
+        <b> | </b>
+      <a href="pg6.php"><b class="fontfamily">Users</b></a>
+        <b> | </b>
+      <a href="products.php"><b class="fontfamily">Manual Orders</b></a>
+        <b> | </b>
+      <a href="class_admin.php"><b class="fontfamily">Checks</b></a>
 
-		<span id='adm'>
-			<img id="usrImg" src="user.png">
-			<a id="usrName" href="">Admin</a>
-		</span>
+      <b class="pull-right"><br>&nbsp;	&nbsp;	<u id="admin" class="pull-right"></u></b>
+      <img id="adminimage" class="img-responsive img-circle pull-right" style="display:inline" width="60" height="60">
+      <br>
+      <h2 class="fontfamily">Products</h2>
+	  <div id="line2">
+  		<span class="pull-right"><a id="addProduct" href="pg8.php?add=1">Add product</a></span>
+  	</div>
+      </div>
+    </div>
 
+
+	<div class="container">
+		<table class="table table-striped">
+			<thead>
+				<tr class="bg-primary">
+					<th>Product</th>
+					<th>Price</th>
+					<th>Image</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+
+			<!-- tr>
+				<td>ahmed</td>
+				<td>1201</td>
+				<td>image</td>
+				<td>6065</td>
+				<td>
+					<a href="">Edit</a>
+					<a href="">Delete</a>
+				</td>
+			</tr> -->
+
+		</table>
 	</div>
 
-	<div id="line2">
-		<a id="title">All Products</a>
-		<span><a id="addProduct" href="pg8.php?add=1">Add product</a></span>
-	</div>
-
-	<table>
-		<tr>
-			<th>Product</th>
-			<th>Price</th>
-			<th>Image</th>
-			<th>Action</th>
-		</tr>
-		<!-- <tr>
-			<td>Tea</td>
-			<td>5 EGP</td>
-			<td></td>
-			<td>
-				<a href="">Available</a>
-				<a href="">Edit</a>
-				<a href="">Delete</a>
-			</td>
-		</tr>
-
-		<tr>
-			<td>Nescafe</td>
-			<td>7 EGP</td>
-			<td></td>
-			<td>
-				<a href="">Available</a>
-				<a href="">Edit</a>
-				<a href="">Delete</a>
-			</td>
-		</tr>
-
-		<tr>
-			<td>Coffee</td>
-			<td>6 EGP</td>
-			<td></td>
-			<td>
-				<a href="">Available</a>
-				<a href="">Edit</a>
-				<a href="">Delete</a>
-			</td>
-		</tr>
- -->
-	</table>
 
 <!-- ---------------------------------------------------- -->
 	<script type="text/javascript">
+	let currentUser = <?php echo json_encode($_SESSION['userInfo']); ?>;
+	document.getElementById("admin").textContent = currentUser['name'];
+	document.getElementById("adminimage").src = currentUser['image'];
 		class admin
 		{
 			showproducts(id, prod, pric, imag, ava)
@@ -105,7 +103,9 @@ require_once('page5.php');
 				delet.textContent="Delete";
 				delet.href="page5.php?did=" + id
 				actions.appendChild(available);
+				actions.appendChild(document.createTextNode('  '));
 				actions.appendChild(edit);
+				actions.appendChild(document.createTextNode('  '));
 				actions.appendChild(delet);
 				row.appendChild(product);
 				row.appendChild(price);

@@ -1,5 +1,8 @@
 <?php
+ob_start();
 session_start();
+if(! isset($_SESSION['userInfo']))
+    header("location: ../login.php");
  ?>
 
 <!DOCTYPE html>
@@ -46,8 +49,8 @@ session_start();
       <b> | </b>
     <a href="class_admin.php"><b class="fontfamily">Checks</b></a>
 
-    <b class="pull-right"><br>&nbsp;	&nbsp;	<u>Admin</u></b>
-    <img src="../imgs/profile.png" class="img-responsive img-circle pull-right" style="display:inline" width="60" height="60">
+    <b class="pull-right"><br>&nbsp;	&nbsp;	<u id="admin" class="pull-right"></u></b>
+    <img id="adminimage" class="img-responsive img-circle pull-right" style="display:inline" width="60" height="60">
     <br>
     <h2 class="fontfamily">Checks</h2>
     </div>
@@ -81,7 +84,7 @@ session_start();
   </div>
   <br>
   <div class="container">
-    <table class="table table-bordered">
+    <table class="table table-borderless">
       <thead>
         <tr class="bg-primary">
           <th class="col-md-6">Name</th>
@@ -119,24 +122,15 @@ session_start();
     </div>
   </div>
 
-  <div class="container">
-  <ul class="pager">
-    <li><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/prev.png" width="20" height="20"></a></li>
-    <li><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/prev1.png" width="20" height="20"></a></li>
-
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">..</a></li>
-
-    <li><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/next1.png" width="20" height="20"></a></li>
-    <li><a href="#"><img class="img-responsive img-circle" style="display:inline" src="images/next.png" width="20" height="20"></a></li>
-  </ul>
-</div>
 
 <!-- <script src="page9.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 // document.addEventListener("DOMContentLoaded", function () {
+
+    var currentUser = <?php echo json_encode($_SESSION['userInfo']); ?>;
+    document.getElementById("admin").textContent = currentUser['name'];
+    document.getElementById("adminimage").textContent = currentUser['image'];
   var datetochanged = false;
   var datefromchanged = false;
   var usernamechanged = false;
@@ -259,7 +253,6 @@ for (var i = 0; i < showorders.length; i++) {
       }  ?>;
       for (var i = 0; i < content.length; i++) {
         var ordercontent =  content[i].split(":")
-        console.log(ordercontent);
         var displaytable3 = document.getElementById('imagesdiv');
         displaytable3.style.display = 'block'
         var containerdiv = document.getElementById('display3');

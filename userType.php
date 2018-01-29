@@ -3,8 +3,8 @@
  ?>
 <?php
 
-    $dsn="mysql:host=localhost;dbname=cafeteria";
-    $db=new PDO($dsn,"amr","amr1990");
+    $dsn="mysql:host=localhost;dbname=id4446548_omgamalcafeteria";
+    $db=new PDO($dsn,"id4446548_tarekessam","comeflywithme");
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     function test_input($data) {
@@ -27,7 +27,7 @@
 
         if($fetched_arr)
         {
-            if(test_input($pas) != test_input($db_hashedPwd))
+            if(test_input(md5($pas)) != test_input($db_hashedPwd))
             {
             header("Location: login.php?password=invalid");
             }

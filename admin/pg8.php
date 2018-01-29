@@ -1,4 +1,5 @@
 <?php
+ob_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -34,8 +35,8 @@ if(isset($_GET['add']) && ($_GET['add']==1))
 		<a class="menuLast" href="class_admin.php">Checks</a>
 
 		<span id='adm'>
-			<img id="usrImg" src="user.png">
-			<a id="usrName" href="">Admin</a>
+			<img id="adminimage" >
+			<a id="admin" href=""></a>
 		</span>
 	</div>
 
@@ -88,6 +89,9 @@ if(isset($_GET['add']) && ($_GET['add']==1))
 	</form>
 
 	<script type="text/javascript">
+		let currentUser = <?php echo json_encode($_SESSION['userInfo']); ?>;
+		document.getElementById("admin").textContent = currentUser['name'];
+		document.getElementById("adminimage").src = currentUser['image'];
 		let image = document.getElementById('product-pic-input');
 		image.addEventListener("change", addImage);
 

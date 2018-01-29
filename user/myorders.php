@@ -1,49 +1,71 @@
 <?php
+ob_start();
     session_start();
+    if(! isset($_SESSION['userInfo']))
+        header("location: ../login.php");
  ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>All Users</title>
-	<link rel="stylesheet" type="text/css" href="page5.css">
+	<!-- <link rel="stylesheet" type="text/css" href="page5.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+    <style>
+    .fontfamily{
+      font-family: "Allerta Stencil", Sans-serif;
+    }
+    </style>
 </head>
 <body>
-	<div>
-		<a class="menu" href="products.php">Home</a>
-		<a class="menuLast" href="user.php">My Orders</a>
+    <div class="container">
+<div class="jumbotron">
+<a href="products.php"><b class="fontfamily">Home</b></a>
+<b> | </b>
+<a href="user.php"><b class="fontfamily">Orders</b></a>
+<br>
+<h2 class="fontfamily">My Orders</h2>
+<img id="userimage" width="40" class="pull-right">
+<b class="pull-right"><br>&nbsp;	&nbsp;	<u id="user" class="pull-right"></u></b>
+</div>
+</div>
+    <div class="container">
 
 
-		<span id='adm'>
-			<img id="usrImg" src="../imgs/profile.png">
-			<a id="usrName" href="">Islam Askar</a>
-		</span>
+        <div class='col-md-3'>
+            <div class="form-group">
+              <p class="fontfamily">from date:</p>
+                    <input id="datefrom" type='date' class="form-control" value="YYYY-MM-DD"/>
+            </div>
+        </div>
+        <div class='col-md-3'>
+            <div class="form-group">
+              <p class="fontfamily">to date:</p>
+                    <input id="dateto" type='date' class="form-control" value="YYYY-MM-DD"/>
+            </div>
+        </div>
 
-	</div>
+	<table class="table table-bordered" id="orders">
+        <thead>
+            <tr class="bg-primary">
+    			<th>Order Date</th>
+    			<th>Status</th>
+    			<th>Amount</th>
+    			<th>Action</th>
+    		</tr>
+        </thead>
 
-	<div id="line2">
-		<a id="title">My Orders</a>
-	</div>
-
-	<div align="center">
-		 Date From: <input type="date"  placeholder="Date From" name="bday" id="datefrom">
-		 Date to: <input type="date" placeholder="Date to" name="bday" id="dateto">
-	</div>
-
-	<table id="orders">
-		<tr>
-			<th>Order Date</th>
-			<th>Status</th>
-			<th>Amount</th>
-			<th>Action</th>
-		</tr>
 	</table>
 
-	<table id="details">
+	<table class="table table-bordered" id="details">
 
 	</table>
 	<h1 id="total"></h1>
 
 	<script type="text/javascript">
+    let user =  <?php echo json_encode($_SESSION['userInfo']); ?>;
+    document.getElementById("user").textContent = user['name'];
+    document.getElementById("userimage").src = user['image'];
 		let orders = <?php echo json_encode($_SESSION['orders']); ?>;
 		let orderDetails = <?php echo json_encode($_SESSION['orders_detail']); ?>;
 
@@ -56,6 +78,7 @@
 		let dateTo = "";
 		let opened = false;
 		let total = 0;
+
 
 		for (var i = orders.length - 1; i >= 0 ; i--) {
 			order = orders[i];
@@ -72,6 +95,8 @@
 			detail.style['margin-left'] = "25px";
 			detail.addEventListener("click", showDetails);
 			detail.id = order['order_id'];
+            detail.classList.add('btn');
+            detail.classList.add('btn-primary');
 
 			orderDate.textContent = order['date'] + " " + order['time'];
 			orderDate.appendChild(detail);
@@ -82,6 +107,8 @@
 				console.log(order['order_id']);
 				cancel.setAttribute("href", "user.php?delete=true&order_id="+order['order_id']);
 				cancel.textContent = "cancel";
+                cancel.classList.add('btn');
+                cancel.classList.add('btn-danger');
 				action.appendChild(cancel);
 			}
 			row.appendChild(orderDate);
@@ -113,7 +140,8 @@
 							image = document.createElement('img');
 
 							image.src = product['image'];
-							image.width = "100";
+							image.width = "70";
+                            image.height = "70";
 							// image.style.margin = "20px";
 
 							figure.style.border = "thin silver solid";

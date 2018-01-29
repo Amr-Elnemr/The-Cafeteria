@@ -1,5 +1,8 @@
 <?php
+ob_start();
     session_start();
+    if(! isset($_SESSION['userInfo']))
+        header("location: ../login.php");
  ?>
 
 <!DOCTYPE html>

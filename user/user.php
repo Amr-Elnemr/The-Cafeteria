@@ -1,11 +1,14 @@
 <?php
+    ob_start();
     session_start();
+    if(! isset($_SESSION['userInfo']))
+        header("location: ../login.php");
  ?>
 
 <?php
     require_once('order.php');
-    $dsn = "mysql:host=localhost;dbname=cafeteria";
-    $db = new PDO($dsn, "amr", "amr1990");
+    $dsn = "mysql:host=localhost;dbname=id4446548_omgamalcafeteria";
+    $db = new PDO($dsn, "id4446548_tarekessam", "comeflywithme");
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     class User
     {

@@ -32,7 +32,7 @@ body{
 	font-weight: bold;
 	position: relative;
 	right: -35%;
-	
+
 }
 
 #title{
@@ -61,17 +61,17 @@ body{
 table{
 	width: 74%;
 	text-align: center;
-	border: 3px solid black;
+	border: 1px solid black;
 	border-collapse: collapse;
 	margin-top: 3%;
 }
 
 th{
-	border: 3px solid black;
+	border: 1px solid black;
 }
 
 td{
-	border: 3px solid black;
+	border: 1px solid black;
 }
 
 #line2{
@@ -90,4 +90,3 @@ td > a{
 	border-right: 10px solid white;
 	font-weight: bold;
 }
-
